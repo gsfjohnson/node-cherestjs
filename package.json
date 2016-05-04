@@ -6,6 +6,9 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
-  "author": "",
+  "author": "Travis Payton <sutekidayo@live.com>",
+  "contributors": [
+    "Glen Johnson <diametrus@gmail.com>"
+  ]
   "license": "MIT"
 }
