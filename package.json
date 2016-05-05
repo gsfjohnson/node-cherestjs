@@ -1,6 +1,6 @@
 {
   "name": "cherestjs",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "CherwellAPI REST interface",
   "main": "index.js",
   "scripts": {
@@ -9,6 +9,11 @@
   "author": "Travis Payton <sutekidayo@live.com>",
   "contributors": [
     "Glen Johnson <diametrus@gmail.com>"
-  ]
-  "license": "MIT"
+  ],
+  "license": "MIT",
+  "repository": "gsfjohnson/node-cherestjs",
+  "dependencies" :
+  { "request": "~2.72"
+  , "moment" : "~2.13"
+  }
 }
