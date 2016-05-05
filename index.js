@@ -1,23 +1,22 @@
+/*jslint node: true */
+/*jslint indent: 2 */
 'use strict';
 
 var request = require('request');
 var moment = require('moment');
 
-module.exports = function(fqdn, apikey, username, password) {
-  return new Cherestjs(fqdn, apikey, username, password);
-};
-
-function Cherestjs (fqdn, apikey, username, password) {
+function Cherestjs(host, apikey, username, password) {
 
   var self = this;
 
   self.token_endpoint = "/Cher" + "wellAPI/token";
   self.v1_endpoint = "/Cher" + "wellAPI/api/V1";
+  self.host = host;
 
   self.token = {
     key: null,
     expiration: moment("0000-01-01"),
-    url: "https://" + fqdn + token_endpoint,
+    url: "https://" + host + self.token_endpoint,
     form: {
       grant_type: 'password',
       client_id: apikey,
@@ -34,7 +33,7 @@ function Cherestjs (fqdn, apikey, username, password) {
 Cherestjs.prototype.getToken = function (callback) {
   var self = this;
 
-  if ( ! moment().isAfter(self.token.expiration) ) { callback(false, self.token.key); return; }
+  if (!moment().isAfter(self.token.expiration)) { callback(false, self.token.key); return; }
 
   request.post({ url: self.token.url, form: self.token.form }, function (err, httpResponse, body) {
     if (err) { return; }
@@ -44,24 +43,24 @@ Cherestjs.prototype.getToken = function (callback) {
     self.token.expiration = moment().add(data.expires_in, 's');
 
     callback(false, self.token.key);
-  };
+  });
 
 };
 
-Cherestjs.getBusinessObject = function (id, callback) {
+Cherestjs.prototype.getBusinessObject = function (id, callback) {
   var self = this;
 
-  self.getToken( function (err, token_key) {
+  self.getToken(function (err, token_key) {
     if (err) { return; }
 
-    var busobj_url = 'https://' + fqdn + v1_endpoint + '/getbusinessobject/busobid/'+ busObjId.i +'/publicid/'+ id;
+    var busobj_url = 'https://' + self.host + self.v1_endpoint + '/getbusinessobject/busobid/' + self.busObjId.i + '/publicid/' + id;
 
     var busobj_headers = {
       Authorization: "Bearer " + token_key,
       Accept: "application/json"
     };
 
-    request({ url: busobj_url, headers: busobj_headers }, function(err, httpResponse, body) {
+    request({ url: busobj_url, headers: busobj_headers }, function (err, httpResponse, body) {
       if (err) { return; }
 
       var fields = {};
@@ -75,4 +74,8 @@ Cherestjs.getBusinessObject = function (id, callback) {
 
   });
 
+};
+
+module.exports = function (host, apikey, username, password) {
+  return new Cherestjs(host, apikey, username, password);
 };
