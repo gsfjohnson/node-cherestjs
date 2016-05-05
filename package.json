@@ -1,7 +1,7 @@
 {
   "name": "cherestjs",
-  "version": "0.0.3",
-  "description": "CherwellAPI REST interface",
+  "version": "0.0.5",
+  "description": "REST interface to popular IT Service Management service",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -12,8 +12,8 @@
   ],
   "license": "MIT",
   "repository": "gsfjohnson/node-cherestjs",
-  "dependencies" :
-  { "request": "~2.72"
-  , "moment" : "~2.13"
+  "dependencies": {
+    "request": "~2.72"
+   ,"moment" : "~2.13"
   }
 }
