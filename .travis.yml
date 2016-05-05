@@ -1,13 +1,15 @@
+sudo: false
 language: node_js
-node_js:
-  - "5"
-  - "5.1"
-  - "4"
-  - "4.2"
-  - "4.1"
-  - "4.0"
-  - "0.12"
-  - "0.11"
-  - "0.10"
-  - "0.8"
-  - "0.6"
+matrix:
+  fast_finish: true
+  include:
+    - node_js: "5"
+      env: TASK=test-node
+    - node_js: "4"
+      env: TASK=test-node
+    - node_js: "0.12"
+      env: TASK=test-node
+    - node_js: "0.10"
+      env: TASK=test-node
+script:
+  - "npm run ${TASK}"
