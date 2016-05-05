@@ -1,6 +1,6 @@
 {
   "name": "cherestjs",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "description": "CherwellAPI REST interface",
   "main": "index.js",
   "scripts": {
