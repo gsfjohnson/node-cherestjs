@@ -56,7 +56,7 @@ Cherestjs.prototype.getBusinessObject = function (id, callback) {
     var url = 'https://' + self.host + self.v1_endpoint + '/getbusinessobject/busobid/' + self.busObjId.i + '/publicid/' + id;
 
     var opts = {
-      timeout: 1000,
+      timeout: 300000, // 5 minutes as Cherwell SaaS is slooooooooooooow to start sometimes.
       accept: "application/json",
       headers: { Authorization: "Bearer " + token_key }
     };
