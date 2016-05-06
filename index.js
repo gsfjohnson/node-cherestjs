@@ -2,7 +2,7 @@
 /*jslint indent: 2 */
 'use strict';
 
-var request = require('request');
+var needle = require('needle');
 var moment = require('moment');
 
 function Cherestjs(host, apikey, username, password) {
@@ -35,12 +35,12 @@ Cherestjs.prototype.getToken = function (callback) {
 
   if (!moment().isAfter(self.token.expiration)) { callback(false, self.token.key); return; }
 
-  request.post({ url: self.token.url, form: self.token.form }, function (err, httpResponse, body) {
-    if (err) { return; }
+  needle.post(self.token.url, self.token.form, {}, function (err, res) {
+    if (err) { callback(err, null); return; }
+    if (res.parser!='json') { callback('invalid response parser', null); return; }
 
-    var data = JSON.parse(body);
-    self.token.key = data.access_token;
-    self.token.expiration = moment().add(data.expires_in, 's');
+    self.token.key = res.body.access_token;
+    self.token.expiration = moment().add(res.body.expires_in, 's');
 
     callback(false, self.token.key);
   });
@@ -51,22 +51,24 @@ Cherestjs.prototype.getBusinessObject = function (id, callback) {
   var self = this;
 
   self.getToken(function (err, token_key) {
-    if (err) { return; }
+    if (err) { callback(err, null); return; }
 
-    var busobj_url = 'https://' + self.host + self.v1_endpoint + '/getbusinessobject/busobid/' + self.busObjId.i + '/publicid/' + id;
+    var url = 'https://' + self.host + self.v1_endpoint + '/getbusinessobject/busobid/' + self.busObjId.i + '/publicid/' + id;
 
-    var busobj_headers = {
-      Authorization: "Bearer " + token_key,
-      Accept: "application/json"
+    var opts = {
+      timeout: 1000,
+      accept: "application/json",
+      headers: { Authorization: "Bearer " + token_key }
     };
 
-    request({ url: busobj_url, headers: busobj_headers }, function (err, httpResponse, body) {
-      if (err) { return; }
+    needle.get(url, opts, function (err, res) {
+      if (err) { callback(err, null); return; }
+      if (res.parser!='json') { callback('invalid response parser', null); return; }
 
       var fields = {};
-      var data = JSON.parse(body);
-      for (var i=0; i < data["fields"].length; i++) {
-        fields[ data["fields"][i]["name"] ] = data["fields"][i]["value"];
+      var data = res.body.fields;
+      for (var i=0; i < data.length; i++) {
+        fields[ data[i]["name"] ] = data[i]["value"];
       }
 
       callback(false, fields);
