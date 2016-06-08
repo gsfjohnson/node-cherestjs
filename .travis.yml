@@ -1,15 +1,6 @@
-sudo: false
-language: node_js
-matrix:
-  fast_finish: true
-  include:
-    - node_js: "5"
-      env: TASK=test-node
-    - node_js: "4"
-      env: TASK=test-node
-    - node_js: "0.12"
-      env: TASK=test-node
-    - node_js: "0.10"
-      env: TASK=test-node
-script:
-  - "npm run ${TASK}"
+deploy:
+  provider: npm
+  api_key:
+    secure: gCnYMUora+/e7PbTN38jBd27rpaHcF0hhD0PdrRo5Om65WqFHRy6X53ZWBEX5M1e2C8vT9xUD8fhIkVrA4cFzYdZxfFqzjoV4EIldVn2vJCVBk/RMXjWwgQw2MufevkjmdlAGDBXPzTM6zywOKXgYZur6aKsbGO0fjZCfPH+dz65JQqIcONicbl9mVM19VUsJ3qLE1aAFaWShYlJI9R+0uhtue3UzIe2eUUOh3s6N/W+5eIOi5dnnCe1uozpPfYoyBiFAWBcifi1OD1qCb1t1klnm/j0I71vU8qSIIxiWnG/9slpFcO277lx+3HmsSgeUCCdXBVWbHi3oC5BNbgfw9PsS5jQn2zEhXw0KjjNBZjwBctx9xpQUACLupRx0BPdHQmlb+jL86OQGYYreEu3u6ZkgHLIt6ElOHq1+F4D6BzxvSM/PMuWrSEsXqZtXWEGAbm64DeaQfh7FuFaQ/06Llm8E/+ZhYxfbFKIjC4PB+6pc53erwMjAD22HNcO14+DHEddK0KnHyYgIPGUwNMWBSb85RfiwfJKknKIiKb6G/ijHE4HXKQVDkzWTQHAngQjYbGTsgRRsUtu14DM4Lg965/6o8E0XR9LzIejL54vi3EKgkqNG79D6WzYEFrI1dYzvsLOs9nDOEXghM1XZslPNUbaiKCSEEMmkMJn+M3Gfvo=
+  on:
+    tags: true
