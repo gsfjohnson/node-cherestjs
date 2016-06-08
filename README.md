@@ -1,5 +1,7 @@
 # Cherestjs for Node.js
 
+[![Build Status](https://travis-ci.org/gsfjohnson/node-cherestjs.svg?branch=master)](http://travis-ci.org/gsfjohnson/node-cherestjs)
+
 This module enables REST calls to the popular IT Service Management Software's REST API.
 
 * [Installation](#installation)
