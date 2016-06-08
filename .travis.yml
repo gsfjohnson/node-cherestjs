@@ -1,3 +1,9 @@
+language: node_js
+
+install: true
+
+script: true
+
 deploy:
   provider: npm
   api_key:
