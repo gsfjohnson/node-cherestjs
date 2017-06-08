@@ -1,6 +1,6 @@
 {
   "name": "cherestjs",
-  "version": "0.0.9",
+  "version": "0.0.10",
   "description": "REST interface to popular IT Service Management service",
   "main": "index.js",
   "scripts": {
