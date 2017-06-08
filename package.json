@@ -1,6 +1,6 @@
 {
   "name": "cherestjs",
-  "version": "0.0.8",
+  "version": "0.0.9",
   "description": "REST interface to popular IT Service Management service",
   "main": "index.js",
   "scripts": {
@@ -13,7 +13,7 @@
   "license": "MIT",
   "repository": "gsfjohnson/node-cherestjs",
   "dependencies": {
-    "needle": "~1.0"
-   ,"moment" : "~2.13"
+    "needle": "~1.0",
+    "moment": "~2.13"
   }
 }
