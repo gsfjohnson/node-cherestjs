@@ -134,7 +134,7 @@ Cherestjs.prototype.getOpenTicketsTeam = function(team_name, callback) {
 
       "busObId": "6dd53665c0c24cab86870a21cf6434ae",
   }
-
+}
 module.exports = function (host, apikey, username, password) {
   return new Cherestjs(host, apikey, username, password);
 };
